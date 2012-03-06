@@ -37,6 +37,28 @@ which contains your view state and any helper methods you want to call.
 Eco is fully synchronous. If your template needs to access data from
 asynchronous operations, perform those first before calling `render`.
 
+## Usage with JST
+
+Another way to use eco with coffee scripts (for example, as the template engine for backbone.js).  You can do this using JST.
+    
+test.js.coffee
+
+    options = [  { 'name': 'keyword', 'long': "Keywords and phrases" }, 
+                 { 'name': 'phone_number', 'long': "Phone number" } ] 
+    rendered_template = JST['templates/test'](options)
+   	alert(rendered_template)
+	
+add this to application.js.coffee
+    
+    #= require_tree ./templates
+
+app/javascripts/templates/test.jst.eco:
+
+    <h1>Test</h1>
+    <% for option in this: %>
+      <p>Name <%= option['name']%> : Long <%= opition['long'] %></p>
+    <% end %>
+
 ## Language reference
 
 Eco's syntax is simple:
